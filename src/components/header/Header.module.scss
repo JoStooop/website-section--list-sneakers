@@ -1,0 +1,37 @@
+.header{
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eaeaea;
+
+  img {
+    margin-right: 15px;
+  }
+}
+
+.company{
+  display: flex;
+  align-items: center;
+}
+
+.title{
+  text-transform: uppercase;
+}
+
+.desc{
+  opacity: 0.5;
+}
+
+.list{
+  display: flex;
+}
+
+.item {
+  margin-right: 30px;
+  cursor: pointer;
+
+  &:nth-child(2){
+    margin-right: 20px;
+  }
+}
