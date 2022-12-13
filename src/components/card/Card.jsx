@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Card.module.scss';
 import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import ContentLoader from 'react-content-loader';
 
 import heartUnLikedIcon from '@/assets/images/heart-unliked.svg';
@@ -13,8 +14,8 @@ import {getElementIdInArray} from '@/redux/selectors/catalogSelector.js';
 const Card = ({favorite, onClickFavorite, onClickPlus, loading = 'loading', onPlus, ...item}) => {
   const {title, imageUrl, price} = item;
 
-  const isItemInFavorites = useSelector((state) => getElementIdInArray(state.favorites.data, item));
-  const isItemInBasket = useSelector((state) => getElementIdInArray(state.basket.data, item));
+  const isItemInFavorites = useSelector((state) => getElementIdInArray(state.favorites.data, item.id));
+  const isItemInBasket = useSelector((state) => getElementIdInArray(state.basket.data, item.id));
 
   return (
     <div className={s.card}>
@@ -23,7 +24,9 @@ const Card = ({favorite, onClickFavorite, onClickPlus, loading = 'loading', onPl
           <div className={s.favorite} onClick={onClickFavorite}>
             <img src={isItemInFavorites ? heartLikedIcon : heartUnLikedIcon} alt="unliked"/>
           </div>
-          <img src={imageUrl} alt="sneakers" width='100%' height={135}/>
+          <Link to={`card/${item.id}`}>
+            <img src={imageUrl} alt="sneakers" width={150} height={135}/>
+          </Link>
           <h5>{title}</h5>
           <div className={s.cardBottom}>
             <div className={s.cardInfo}>

@@ -11,6 +11,8 @@ import {FavoritesPage} from '@/pages/FavoritesPage';
 import {LayoutPage} from '@/pages/LayoutPage.jsx';
 import {HomePage} from '@/pages/HomePage.jsx';
 import API from '@/api/api.js';
+import {ProductPage} from '@/pages/ProductPage.jsx';
+import {ErrorPage} from '@/pages/ErrorPage.jsx';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -50,7 +52,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={<LayoutPage/>}>
           <Route index element={<HomePage/>}/>
+          <Route path="card/:id" element={<ProductPage/>}/>
           <Route path="favorites" element={<FavoritesPage/>}/>
+          <Route path='*' element={<ErrorPage />}/>
         </Route>
       </Routes>
     </div>

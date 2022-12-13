@@ -1,4 +1,4 @@
-export const getElementIdInArray = ((state, item) => state.find((el) => Number(el.id) === Number(item.id)));
+export const getElementIdInArray = ((state, item) => state.find((el) => Number(el.id) === Number(item)));
 
 export const getItemsCatalog = ((state) => state.catalog.data);
 
