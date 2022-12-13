@@ -24,7 +24,7 @@ const Card = ({favorite, onClickFavorite, onClickPlus, loading = 'loading', onPl
           <div className={s.favorite} onClick={onClickFavorite}>
             <img src={isItemInFavorites ? heartLikedIcon : heartUnLikedIcon} alt="unliked"/>
           </div>
-          <Link to={'card/1'}>
+          <Link to={`card/${item.id}`}>
             <img src={imageUrl} alt="sneakers" width={150} height={135}/>
           </Link>
           <h5>{title}</h5>
