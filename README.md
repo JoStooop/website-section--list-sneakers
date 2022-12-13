@@ -10,6 +10,10 @@
 
 - [Открыть сайт](https://website-section-list-sneakers.vercel.app/)
 
+## Примечание
+
+Над стилизацией раздела НЕ делал сильный упор!
+
 ## Основной стек технологий
 
 ![React](https://img.shields.io/badge/-React-000?style=for-the-badge&logo=React)
