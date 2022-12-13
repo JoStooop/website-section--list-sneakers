@@ -8,7 +8,7 @@
 
 ## Distribute
 
-- [Открыть сайт](https://website-test-nkzofmg9x-jostooop.vercel.app/)
+- [Открыть сайт](https://website-section-list-sneakers.vercel.app/)
 
 ## Основной стек технологий
 
