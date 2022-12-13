@@ -1,19 +1,18 @@
 import React, {useState} from 'react';
 import s from './Drawer.module.scss';
-import axios from 'axios';
 
 import buttonRemoveIcon from '@/assets/images/button-remove.svg';
 import arrowIcon from '@/assets/images/arrow.svg';
 import completeOrderIcon from '@/assets/images/complete-order.jpeg';
 import emptyCartIcon from '@/assets/images/empty-cart.png';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {clearBasket, errorLoadingBasket, removeItemFromBasket} from '@/redux/reducers/basketSlice.js';
+import {getItemsBasket, getTotalPriceBasket} from '@/redux/selectors/catalogSelector.js';
 import {MyGreenButton} from '@/components/common/myGreenButton/MyGreenButton';
 import {Info} from '@/components/info/Info.jsx';
-import {useDispatch, useSelector} from 'react-redux';
-import {getItemsBasket, getTotalPriceBasket} from '@/redux/selectors/catalogSelector.js';
 import {calcVAT} from '@/helpers/calcVAT.js';
-import {clearBasket, errorLoadingBasket, removeItemFromBasket} from '@/redux/reducers/basketSlice.js';
-import {API} from '@/api/serverUrl.js';
+import API from '@/api/api.js';
 
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -30,7 +29,6 @@ const Drawer = ({cartOpened, setCartOpened}) => {
 
   const onRemove = async (idProduct) => {
     try {
-      await axios.delete(`${API.URL_BASKET}/${id}`);
       dispatch(removeItemFromBasket(idProduct));
     } catch (e) {
       alert('Ошибка при удалении из корзины');
@@ -40,7 +38,7 @@ const Drawer = ({cartOpened, setCartOpened}) => {
 
   const onClickOrder = async () => {
     try {
-      const {data} = await axios.post(API.URL_ORDERS, itemsShoppingCart);
+      const {data} = await API.post('orders', itemsShoppingCart);
 
       await delay(2000);
 
@@ -67,7 +65,7 @@ const Drawer = ({cartOpened, setCartOpened}) => {
           <div className={s.test}>
             <div className={s.itemsList}>
               {itemsShoppingCart.map(({id, title, imageUrl, price}) =>
-                <div key={id} className={s.item}>
+                <div key={Number(id)} className={s.item}>
                   <div
                     style={{backgroundImage: `url('${imageUrl}')`}}
                     className={s.itemImg}></div>
@@ -76,7 +74,7 @@ const Drawer = ({cartOpened, setCartOpened}) => {
                     <b>{price} руб.</b>
                   </div>
                   <img
-                    onClick={() => onRemove(id)}
+                    onClick={() => onRemove(Number(id))}
                     src={buttonRemoveIcon}
                     alt="remove"
                   />

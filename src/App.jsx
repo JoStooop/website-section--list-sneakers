@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import axios from 'axios';
 
-import {loadingCatalog, errorLoadingCatalog, setIsLoading} from '@/redux/reducers/catalogSlice.js';
+import {
+  loadingCatalog,
+  errorLoadingCatalog,
+  setStatusLoadingCatalog,
+} from '@/redux/reducers/catalogSlice.js';
 import {FavoritesPage} from '@/pages/FavoritesPage';
 import {LayoutPage} from '@/pages/LayoutPage.jsx';
 import {HomePage} from '@/pages/HomePage.jsx';
-import {loadingBasket} from '@/redux/reducers/basketSlice.js';
-import {loadingFavorites} from '@/redux/reducers/favoritesSlice.js';
-import {API} from '@/api/serverUrl.js';
+import API from '@/api/api.js';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -19,18 +20,21 @@ const App = () => {
   useEffect((() => {
     async function fetchData() {
       try {
-        dispatch(setIsLoading('loading'));
-        const [catalogResponse, basketResponse, favoritesResponse] = await Promise.all([
-          axios.get(API.URL_CATALOG),
-          axios.get(API.URL_BASKET),
-          axios.get(API.URL_FAVORITES),
+        dispatch(setStatusLoadingCatalog('loading'));
+        // dispatch(setStatusLoadingBasket('loading'));
+        // dispatch(setStatusLoadingFavorite('loading'));
+
+        const [catalogResp] = await Promise.all([
+          API.get('catalog'),
+          // API.get('basket'),
+          // API.get('favorites'),
         ]);
 
-        await delay(2000);
+        // await delay(2000);
 
-        dispatch(loadingCatalog(catalogResponse.data));
-        dispatch(loadingBasket(basketResponse.data));
-        dispatch(loadingFavorites(favoritesResponse.data));
+        dispatch(loadingCatalog(catalogResp.data));
+        // dispatch(loadingBasket(basketResp.data));
+        // dispatch(loadingFavorites(favoritesResp.data));
       } catch (error) {
         alert('Ошибка при запросе данных ;(');
         dispatch(errorLoadingCatalog(error.response));

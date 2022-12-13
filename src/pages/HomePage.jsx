@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
-import searchIcon from '@/assets/images/search.svg';
-import {Card} from '@/components/card/Card.jsx';
 import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
-import {addToBasket, errorLoadingBasket, setBasketItems} from '@/redux/reducers/basketSlice.js';
+
+import searchIcon from '@/assets/images/search.svg';
+
+import {getItemsBasket, getItemsCatalog, getItemsFavorites} from '@/redux/selectors/catalogSelector.js';
+import {addToBasket, errorLoadingBasket, setDataBasket} from '@/redux/reducers/basketSlice.js';
 import {addToFavorites, errorLoadingFavorite, setFavoritesItems} from '@/redux/reducers/favoritesSlice.js';
+import {Card} from '@/components/card/Card.jsx';
 import {Pagination} from '@/components/common/myPagination/Pagination';
 import {getLimitedListOutput} from '@/helpers/pagination.js';
-import {API} from '@/api/serverUrl.js';
-import {getItemsBasket, getItemsCatalog, getItemsFavorites} from '@/redux/selectors/catalogSelector.js';
+
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const HomePage = () => {
   const itemsBasket = useSelector(getItemsBasket);
   const favoritesItems = useSelector(getItemsFavorites);
   const {loading} = useSelector((state) => state.catalog);
-
 
   const [page, setPage] = useState(1);
   const [goodsLimit] = useState(4);
@@ -31,13 +31,11 @@ const HomePage = () => {
 
   const onClickPlus = async (item) => {
     try {
-      const findItemBasket = itemsBasket.find((el) => Number(el.id) === Number(item.id));
+      const findItemBasket = await itemsBasket.find((el) => Number(el.id) === Number(item.id));
       if (findItemBasket) {
-        await axios.delete(`${API.URL_BASKET}/${item.id}`);
-        dispatch(setBasketItems(findItemBasket.id));
+        dispatch(setDataBasket(findItemBasket.id));
       } else {
-        const {data} = await axios.post(API.URL_BASKET, item);
-        dispatch(addToBasket(data));
+        dispatch(addToBasket(item));
       }
     } catch (e) {
       alert('Ошибка при добавлении в корзину');
@@ -50,11 +48,9 @@ const HomePage = () => {
     try {
       const findItem = favoritesItems.find((el) => Number(el.id) === Number(item.id));
       if (findItem) {
-        await axios.delete(`${API.URL_FAVORITES}/${item.id}`);
         dispatch(setFavoritesItems(findItem.id));
       } else {
-        const {data} = await axios.post(API.URL_FAVORITES, item);
-        dispatch(addToFavorites(data));
+        dispatch(addToFavorites(item));
       }
     } catch (e) {
       alert('Ошибка при добавлении в избранное');
@@ -96,7 +92,8 @@ const HomePage = () => {
       <div className="sneakersList">
         {renderItems()}
       </div>
-      {loading === 'loading' ? null : <Pagination allGoods={catalog.length} goodsLimit={goodsLimit} setCurrentPage={changePage}/> }
+      {loading === 'loading' ? null :
+        <Pagination allGoods={catalog.length} goodsLimit={goodsLimit} setCurrentPage={changePage}/>}
     </div>
   );
 };

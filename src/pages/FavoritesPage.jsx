@@ -1,23 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@/components/card/Card.jsx';
 import {errorLoadingFavorite, setFavoritesItems} from '@/redux/reducers/favoritesSlice.js';
-import axios from 'axios';
 
 const FavoritesPage = () => {
   const dispatch = useDispatch();
+
   const {data, loading} = useSelector((state) => state.favorites);
 
   const onClickFavorite = async (item) => {
     try {
-      const findItem = data.find((el) => Number(el.id) === Number(item.id));
-      console.log(findItem);
       dispatch(setFavoritesItems(item.id));
-      // await axios.delete(`https://639313ecab513e12c502627c.mockapi.io/favorites/${item.id}`);
     } catch (e) {
       alert('Ошибка при удалении из избранного');
       dispatch(errorLoadingFavorite(e.response));
-      console.log(e);
     }
   };
 

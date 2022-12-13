@@ -17,33 +17,16 @@ export const catalogSlice = createSlice({
     errorLoadingCatalog: (state, action) => {
       state.error = action.payload;
     },
-    downloadFavorites: (state, action) => {
-
-    },
-    setIsLoading: (state, action) => {
+    setStatusLoadingCatalog: (state, action) => {
       state.loading = action.payload;
-    },
-    onAddToCart: (state, action) => {
-      state.basket.push(action.payload);
-    },
-    onAddToFavorite: (state, action) => {
-      state.favorites.push(action.payload);
-    },
-    removeItemFromFavorites: (state, action) => {
-      state.favorites = state.favorites.filter((favorite) => favorite.id !== action.payload);
     },
   },
 });
 
 export const {
-  setIsLoading,
+  setStatusLoadingCatalog,
   errorLoadingCatalog,
   loadingCatalog,
-  onAddToCart,
-  onAddToFavorite,
-  removeItemFromCart,
-  removeItemFromFavorites,
-
 } = catalogSlice.actions;
 
 export default catalogSlice.reducer;
