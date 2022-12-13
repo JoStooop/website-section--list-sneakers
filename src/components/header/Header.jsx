@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import cartIcon from '@/assets/images/cart.svg';
-import logoIcon from '@/assets/images/logo.png';
+import logoIcon from '@/assets/images/sneakers-logo.png';
 import heartIcon from '@/assets/images/heart.png';
 import heartLikedIcon from '@/assets/images/heart-liked.svg';
 import userIcon from '@/assets/images/user.svg';
@@ -25,9 +25,9 @@ const Header = () => {
       <header className={s.header}>
         <Link to="/">
           <div className={s.company}>
-            <img width={40} height={40} src={logoIcon} alt="logo"/>
+            <img width={90} height={50} src={logoIcon} alt="logo"/>
             <div>
-              <h3 className={s.title}>React Sneakers</h3>
+              <h3 className={s.title}>Street Beat</h3>
               <p className={s.desc}>Магазин лучших кроссовок</p>
             </div>
           </div>
