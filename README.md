@@ -1,25 +1,21 @@
-<p align="center">
-   <img src="https://img.shields.io/badge/node.js-v18.12.1-success" alt="Node-version">
-</p>
 
-## About
+<div align="center">
+        <p>Section with Product Listing and Order Placement.</p>
+</div>
 
-Раздел на сайте с рендерингом списка товаров и оформлением заказа.
+## Website preview:
+<details><summary><b>Show screenshots</b></summary>
 
-## Distribute
+![screen--jostooop--website-section-list-sneakers](readme-images/sneakers-list.png)
+</details>
 
-- [Открыть сайт](https://website-section-list-sneakers.vercel.app/)
+## Stack:
+![React](https://img.shields.io/badge/-React-090909?style=for-the-badge&logo=React&logoColor=F8C52)
+![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-## Примечание
+## Deploy
+Website link: [Section list sneakers](https://website-section-list-sneakers.vercel.app/)
 
-Над стилизацией раздела НЕ делал сильный упор!
-
-## Основной стек технологий
-
-![React](https://img.shields.io/badge/-React-000?style=for-the-badge&logo=React)
-![Redux](https://img.shields.io/badge/-Redux-000?style=for-the-badge&logo=redux&logoColor=764abc)
-![GIT](https://img.shields.io/badge/-GIT-090909?style=for-the-badge&logo=GIT&logoColor=CC0000)
-
-## Developers
-
+## Developers:
 - [JoStooop](https://github.com/JoStooop)
